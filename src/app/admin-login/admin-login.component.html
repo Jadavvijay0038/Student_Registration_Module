@@ -1,0 +1,29 @@
+<div class="container">
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Email Address/Number *</label>
+            <input type="emailOrMobile" class="form-control" formControlName="emailOrMobile" placeholder="name@example.com">
+            <span
+                *ngIf="isSubmited || myForm.get('emailOrMobile')?.invalid && (myForm.get('emailOrMobile')?.dirty || myForm.get('emailOrMobile')?.touched)">
+                <span *ngIf="myForm.get('emailOrMobile')?.errors?.['required']" style="color:red">Email or Mobile No is required.</span>
+            </span>
+        </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Password *</label>
+            <input formControlName="password" type="password" class="form-control">
+            <span
+                *ngIf="isSubmited || myForm.get('password')?.invalid && (myForm.get('password')?.dirty || myForm.get('password')?.touched)">
+                <span *ngIf="myForm.get('password')?.errors?.['required']" style="color:red">Password is required.</span>
+            </span>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <br>
+        <div class="footer">
+            <hr>
+            Student registration Form. 
+            <a [routerLink]="['../registration']">Register</a>
+        </div>
+    </form>
+    <div *ngIf="loginError" class="error-message">{{ loginError }}</div>
+
+</div>

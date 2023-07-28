@@ -1,0 +1,109 @@
+<div class="form-container">
+    <h2>Student Update</h2>
+    <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" formControlName="firstName" required>
+                <div class="error-message" *ngIf="formControls.firstName.invalid && formControls.firstName.touched">
+                    First Name is required.
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" formControlName="lastName" required>
+                <div class="error-message" *ngIf="formControls.lastName.invalid && formControls.lastName.touched">
+                    Last Name is required.
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" formControlName="dob" required>
+                <div class="error-message" *ngIf="formControls.dob.invalid && formControls.dob.touched">
+                    Date of Birth is required.
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="email">Email</label>
+                <input type="email" id="email" formControlName="email" required>
+                <div class="error-message" *ngIf="formControls.email.invalid && formControls.email.touched">
+                    <div *ngIf="formControls.email.errors?.required">
+                        Email is required.
+                    </div>
+                    <div *ngIf="formControls.email.errors?.email">
+                        Please enter a valid email address.
+                    </div>
+                    <div *ngIf="formControls.email.errors?.duplicate">
+                        Email Already Registred.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="text" id="phoneNumber" formControlName="phoneNumber" required>
+                <div class="error-message" *ngIf="formControls.phoneNumber.invalid && formControls.phoneNumber.touched">
+                    <div *ngIf="formControls.phoneNumber.errors?.required">
+                        Phone Number is required.
+                    </div>
+                    <div *ngIf="formControls.phoneNumber.errors?.pattern">
+                        Please enter a valid phone number.
+                    </div>
+                    <div *ngIf="formControls.phoneNumber.errors?.duplicate">
+                        Mobile Number Already Registred.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="state">State</label>
+                <select id="state" formControlName="state" required>
+                    <option value="" disabled selected>Select a State</option>
+                    <option *ngFor="let state of states" [value]="state.name">{{ state.name }}</option>
+                </select>
+                <div class="error-message" *ngIf="formControls.state.invalid && formControls.state.touched">
+                    State is required.
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="city">City</label>
+                <select id="city" formControlName="city" required>
+                    <option value="" disabled selected>Select a City</option>
+                    <option *ngFor="let city of cities" [value]="city.name">{{ city.name }}</option>
+                </select>
+                <div class="error-message" *ngIf="formControls.city.invalid && formControls.city.touched">
+                    City is required.
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="pincode">Pincode</label>
+                <input type="text" id="pincode" formControlName="pincode" required>
+                <div class="error-message" *ngIf="formControls.pincode.invalid && formControls.pincode.touched">
+                    <div *ngIf="formControls.pincode.errors?.required">
+                        Pincode is required.
+                    </div>
+                    <div *ngIf="formControls.pincode.errors?.pattern">
+                        Please enter a valid 6-digit pincode.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="profileImage">Profile Image</label>
+                <input type="file" id="profileImage" (change)="onFileSelected($event)" formControlName="profileImage">
+            </div>
+            <div class="form-group col-md-6"><img [src]="imagePreview" height="100px" width="100px" alt="Image Preview"
+                    *ngIf="imagePreview"></div>
+        </div>
+        <div class="form-actions">
+            <button type="submit" [disabled]="updateForm.invalid">Update</button>
+        </div>
+    </form>
+</div>
